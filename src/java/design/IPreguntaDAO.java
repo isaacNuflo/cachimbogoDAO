@@ -14,6 +14,7 @@ import to.SubtemaTO;
  * @author isaac
  */
 public interface IPreguntaDAO {
+    public List<PreguntaTO> getPreguntasRandom(Integer id_subtema);
     public List<PreguntaTO> getPreguntas();
     public PreguntaTO getPreguntaById(Integer id_pregunta);
     public List<PreguntaTO> getPreguntasBySubtema(Integer id_subtema);

@@ -5,10 +5,14 @@
  */
 package design;
 
+import java.util.List;
+import to.AsignaturaTO;
+
 /**
  *
  * @author isaac
  */
 public interface IAsignaturaDAO {
-    
+    public AsignaturaTO getAsignaturaById(Integer id_subtema);
+    public List<AsignaturaTO> getAsignaturas();
 }

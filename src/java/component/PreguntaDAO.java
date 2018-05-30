@@ -89,7 +89,7 @@ public class PreguntaDAO implements IPreguntaDAO {
     public PreguntaTO getPreguntaById(Integer id_pregunta) {
         PreguntaTO pregunta = new PreguntaTO();
         try {
-            String sql = "select id_pregunta, enunciado, clave1, clave2, clave3, clave4, clave5, estado, s.id_subtema, tp.id_tipopregunta, d.id_dificultad, d.nivel, correcta_num, informacion "
+            String sql = "select enunciado, clave1, clave2, clave3, clave4, clave5, estado, s.id_subtema, tp.id_tipopregunta, d.id_dificultad, d.nivel, correcta_num, informacion "
                     + "from pregunta "
                     + "inner join subtema s on pregunta.id_subtema = s.id_subtema "
                     + "inner join dificultad d on pregunta.id_dificultad = d.id_dificultad "
@@ -102,23 +102,23 @@ public class PreguntaDAO implements IPreguntaDAO {
                 SubtemaTO subtema = new SubtemaTO();
                 TipoPreguntaTO tp = new TipoPreguntaTO();
                 DificultadTO dificultad = new DificultadTO();
-                pregunta.setIdPregunta(rs.getInt(1));
-                pregunta.setEnunciado(rs.getString(2));
-                pregunta.setClave1(rs.getString(3));
-                pregunta.setClave2(rs.getString(4));
-                pregunta.setClave3(rs.getString(5));
-                pregunta.setClave4(rs.getString(6));
-                pregunta.setClave5(rs.getString(7));
-                pregunta.setEstado(rs.getInt(8));
-                subtema.setIdSubtema(rs.getInt(9));
-                tp.setIdTipopregunta(rs.getInt(10));
-                dificultad.setIdDificultad(rs.getInt(11));
-                dificultad.setNivel(rs.getString(12));
+                pregunta.setIdPregunta(id_pregunta);
+                pregunta.setEnunciado(rs.getString(1));
+                pregunta.setClave1(rs.getString(2));
+                pregunta.setClave2(rs.getString(3));
+                pregunta.setClave3(rs.getString(4));
+                pregunta.setClave4(rs.getString(5));
+                pregunta.setClave5(rs.getString(6));
+                pregunta.setEstado(rs.getInt(7));
+                subtema.setIdSubtema(rs.getInt(8));
+                tp.setIdTipopregunta(rs.getInt(9));
+                dificultad.setIdDificultad(rs.getInt(10));
+                dificultad.setNivel(rs.getString(11));
                 pregunta.setIdDificultad(dificultad);
                 pregunta.setIdSubtema(subtema);
                 pregunta.setIdTipopregunta(tp);
-                pregunta.setCorrectaNum(rs.getInt(13));
-                pregunta.setInformacion(rs.getString(14));
+                pregunta.setCorrectaNum(rs.getInt(12));
+                pregunta.setInformacion(rs.getString(13));
                 rs.close();
                 return pregunta;
             } else {
@@ -143,7 +143,7 @@ public class PreguntaDAO implements IPreguntaDAO {
     public List<PreguntaTO> getPreguntasBySubtema(Integer id_subtema) {
         preguntas = new ArrayList<>();
         try {
-            String sql = "select id_pregunta, enunciado, clave1, clave2, clave3, clave4, clave5, estado, s.id_subtema, tp.id_tipopregunta, d.id_dificultad, d.nivel, correcta_num, informacion "
+            String sql = "select id_pregunta, enunciado, clave1, clave2, clave3, clave4, clave5, estado, tp.id_tipopregunta, d.id_dificultad, d.nivel, correcta_num, informacion "
                     + "from pregunta "
                     + "inner join subtema s on pregunta.id_subtema = s.id_subtema "
                     + "inner join dificultad d on pregunta.id_dificultad = d.id_dificultad "
@@ -165,15 +165,15 @@ public class PreguntaDAO implements IPreguntaDAO {
                 pregunta.setClave4(rs.getString(6));
                 pregunta.setClave5(rs.getString(7));
                 pregunta.setEstado(rs.getInt(8));
-                subtema.setIdSubtema(rs.getInt(9));
-                tp.setIdTipopregunta(rs.getInt(10));
-                dificultad.setIdDificultad(rs.getInt(11));
-                dificultad.setNivel(rs.getString(12));
+                subtema.setIdSubtema(id_subtema);
+                tp.setIdTipopregunta(rs.getInt(9));
+                dificultad.setIdDificultad(rs.getInt(10));
+                dificultad.setNivel(rs.getString(11));
                 pregunta.setIdDificultad(dificultad);
                 pregunta.setIdSubtema(subtema);
                 pregunta.setIdTipopregunta(tp);
-                pregunta.setCorrectaNum(rs.getInt(13));
-                pregunta.setInformacion(rs.getString(14));
+                pregunta.setCorrectaNum(rs.getInt(12));
+                pregunta.setInformacion(rs.getString(13));
                 preguntas.add(pregunta);
             }
             rs.close();
@@ -231,19 +231,19 @@ public class PreguntaDAO implements IPreguntaDAO {
     @Override
     public boolean updatePregunta(PreguntaTO id_pregunta) {
         String sql = "update pregunta "
-                    + "set enunciado = ?, "
-                    + "clave1 = ?, "
-                    + "clave2 = ?, "
-                    + "clave3 = ?, "
-                    + "clave4 = ?, "
-                    + "clave5 = ?, "
-                    + "estado = ?, "
-                    + "id_subtema = ?, "
-                    + "id_tipopregunta = ?, "
-                    + "id_dificultad = ?, "
-                    + "correcta_num = ?, "
-                    + "informacion = ? "
-                    + "where id_pregunta = ?;";
+                + "set enunciado = ?, "
+                + "clave1 = ?, "
+                + "clave2 = ?, "
+                + "clave3 = ?, "
+                + "clave4 = ?, "
+                + "clave5 = ?, "
+                + "estado = ?, "
+                + "id_subtema = ?, "
+                + "id_tipopregunta = ?, "
+                + "id_dificultad = ?, "
+                + "correcta_num = ?, "
+                + "informacion = ? "
+                + "where id_pregunta = ?;";
         try {
             connection.setAutoCommit(false);
             st = connection.prepareStatement(sql);
@@ -288,24 +288,24 @@ public class PreguntaDAO implements IPreguntaDAO {
             }
         }
     }
-    
+
     @Override
-    public boolean insertPregunta(PreguntaTO id_pregunta){
-                String sql = "insert into pregunta"
-                            + "(id_pregunta, "
-                            + "enunciado, "
-                            + "clave1, "
-                            + "clave2, "
-                            + "clave3, "
-                            + "clave4, "
-                            + "clave5, "
-                            + "estado, "
-                            + "id_subtema, "
-                            + "id_tipopregunta, "
-                            + "id_dificultad, "
-                            + "correcta_num, "
-                            + "informacion) "
-                            + "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    public boolean insertPregunta(PreguntaTO id_pregunta) {
+        String sql = "insert into pregunta"
+                + "(id_pregunta, "
+                + "enunciado, "
+                + "clave1, "
+                + "clave2, "
+                + "clave3, "
+                + "clave4, "
+                + "clave5, "
+                + "estado, "
+                + "id_subtema, "
+                + "id_tipopregunta, "
+                + "id_dificultad, "
+                + "correcta_num, "
+                + "informacion) "
+                + "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         try {
             connection.setAutoCommit(false);
             st = connection.prepareStatement(sql);
@@ -341,6 +341,47 @@ public class PreguntaDAO implements IPreguntaDAO {
             } catch (SQLException ex) {
                 Logger.getLogger(PreguntaDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
+            if (st != null) {
+                try {
+                    st.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PreguntaDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    @Override
+    public List<PreguntaTO> getPreguntasRandom(Integer id_subtema) {
+        Integer first = 0, last = 0;
+        preguntas = new ArrayList<>();
+        try {
+            String sql = "select id_pregunta from pregunta limit 1";
+            st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                first = rs.getInt(1);
+            }
+            rs.close();
+            st.close();
+            sql = "select id_pregunta from pregunta order by id_pregunta desc limit 1";
+            st = connection.prepareStatement(sql);
+            rs = st.executeQuery();
+            if (rs.next()) {
+                last = rs.getInt(1);
+            }
+            rs.close();
+            st.close();
+            for (int i = 0; i < 7; i++) {
+                Integer rand = (int) ((Math.random() * last) + first);
+                PreguntaTO pregunta = this.getPreguntaById(rand);
+                preguntas.add(pregunta);
+            }
+            return preguntas;
+        } catch (SQLException ex) {
+            Logger.getLogger(PreguntaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } finally {
             if (st != null) {
                 try {
                     st.close();

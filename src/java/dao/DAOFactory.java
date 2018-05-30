@@ -7,6 +7,7 @@ package dao;
 
 import component.*;
 import design.*;
+import java.sql.SQLException;
 
 /**
  *
@@ -23,7 +24,7 @@ public class DAOFactory {
         return daoFac;
     }
     
-    public IAsignaturaDAO getAsignaturaDAO(){
+    public IAsignaturaDAO getAsignaturaDAO() throws SQLException{
         return new AsignaturaDAO();
     }
     
@@ -31,7 +32,7 @@ public class DAOFactory {
         return new DificultadDAO();
     }
     
-    public IPreguntaDAO getPreguntaDAO(){
+    public IPreguntaDAO getPreguntaDAO() throws SQLException{
         return new PreguntaDAO();
     }
     
@@ -39,11 +40,11 @@ public class DAOFactory {
         return new RespuestaDAO();
     }
     
-    public ISubtemaDAO getSubtemaDAO(){
+    public ISubtemaDAO getSubtemaDAO() throws SQLException{
         return new SubtemaDAO();
     }
     
-    public ITemaDAO getTemaDAO(){
+    public ITemaDAO getTemaDAO() throws SQLException{
         return new TemaDAO();
     }
     

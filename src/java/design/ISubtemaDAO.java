@@ -5,10 +5,15 @@
  */
 package design;
 
+import java.util.List;
+import to.SubtemaTO;
+
 /**
  *
  * @author isaac
  */
 public interface ISubtemaDAO {
-    
+    public SubtemaTO getSubtemaById(Integer id_subtema);
+    public List<SubtemaTO> getSubtemas();
+    public List<SubtemaTO> getSubtemasByTema(Integer id_tema);
 }
